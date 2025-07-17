@@ -95,6 +95,9 @@ def teacheloginview(request):
 # ===================== TEACHER DASHBOARD =====================
 @login_required
 def teacherdashboard(request):
+    if not request.user.is_teacher:
+        return redirect('landingpage')
+    
     current_tab = request.GET.get('tab', 'pending')
     page = request.GET.get('page', 1)
     

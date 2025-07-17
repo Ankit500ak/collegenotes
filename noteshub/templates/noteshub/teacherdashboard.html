@@ -1397,12 +1397,20 @@
             }
         }
 
-        // Auto-submit filter forms on change
-        document.querySelectorAll('.filter-form input').forEach(input => {
-            input.addEventListener('change', function() {
-                const form = this.closest('form');
-                form.submit();
-            });
+        // Wait for the DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Auto-submit filter forms on change
+            const filterInputs = document.querySelectorAll('.filter-form input');
+            if (filterInputs.length > 0) {
+                filterInputs.forEach(input => {
+                    input.addEventListener('change', function() {
+                        const form = this.closest('form');
+                        if (form) {
+                            form.submit();
+                        }
+                    });
+                });
+            }
         });
 
         // Add submit buttons to filter forms
