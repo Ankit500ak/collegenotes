@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: collegenotes-django
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn collegenotes.wsgi
+    autoDeploy: true
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: collegenotes.settings
+      - key: SECRET_KEY
+        sync: false
